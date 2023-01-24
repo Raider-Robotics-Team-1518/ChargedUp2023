@@ -68,9 +68,9 @@ public class SwerveTrain extends SubsystemBase{
   
     // These are our modules. We initialize them in the constructor.
     private final SwerveModule m_frontLeftModule;
-    //private final SwerveModule m_frontRightModule;
-    /*private final SwerveModule m_backLeftModule;
-    private final SwerveModule m_backRightModule;*/
+    private final SwerveModule m_frontRightModule;
+    private final SwerveModule m_backLeftModule;
+    private final SwerveModule m_backRightModule;
   
     private ChassisSpeeds m_chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
   
@@ -98,9 +98,7 @@ public class SwerveTrain extends SubsystemBase{
       // you MUST change it. If you do not, your code will crash on startup.
       m_frontLeftModule = Mk4SwerveModuleHelper.createFalcon500(
               // This parameter is optional, but will allow you to see the current state of the module on the dashboard.
-              tab.getLayout("Front Left Module", BuiltInLayouts.kList)
-                      .withSize(2, 4)
-                      .withPosition(0, 0),
+
               // This can either be STANDARD or FAST depending on your gear configuration
               Mk4SwerveModuleHelper.GearRatio.L1,
               // This is the ID of the drive motor
@@ -114,7 +112,7 @@ public class SwerveTrain extends SubsystemBase{
       );
   
       // We will do the same for the other modules
-      /*m_frontRightModule = Mk4SwerveModuleHelper.createFalcon500(
+      m_frontRightModule = Mk4SwerveModuleHelper.createFalcon500(
               tab.getLayout("Front Right Module", BuiltInLayouts.kList)
                       .withSize(2, 4)
                       .withPosition(2, 0),
@@ -123,8 +121,8 @@ public class SwerveTrain extends SubsystemBase{
               FRONT_RIGHT_MODULE_STEER_MOTOR,
               FRONT_RIGHT_MODULE_STEER_ENCODER,
               FRONT_RIGHT_MODULE_STEER_OFFSET
-      );*/
-        /* 
+      );
+
       m_backLeftModule = Mk4SwerveModuleHelper.createFalcon500(
               tab.getLayout("Back Left Module", BuiltInLayouts.kList)
                       .withSize(2, 4)
@@ -145,7 +143,7 @@ public class SwerveTrain extends SubsystemBase{
               BACK_RIGHT_MODULE_STEER_MOTOR,
               BACK_RIGHT_MODULE_STEER_ENCODER,
               BACK_RIGHT_MODULE_STEER_OFFSET
-      );*/
+      );
     }
   
     /**
@@ -180,9 +178,9 @@ public class SwerveTrain extends SubsystemBase{
       SwerveDriveKinematics.desaturateWheelSpeeds(states, MAX_VELOCITY_METERS_PER_SECOND);
   
       m_frontLeftModule.set(states[0].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[0].angle.getRadians());
-      //m_frontRightModule.set(states[1].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[1].angle.getRadians());
-      /*m_backLeftModule.set(states[2].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[2].angle.getRadians());
-      m_backRightModule.set(states[3].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[3].angle.getRadians());*/
+      m_frontRightModule.set(states[1].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[1].angle.getRadians());
+      m_backLeftModule.set(states[2].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[2].angle.getRadians());
+      m_backRightModule.set(states[3].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE, states[3].angle.getRadians());
    
    }
 }
