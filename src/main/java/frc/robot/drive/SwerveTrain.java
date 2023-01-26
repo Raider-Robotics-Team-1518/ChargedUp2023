@@ -2,6 +2,7 @@ package frc.robot.drive;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
+import com.swervedrivespecialties.swervelib.Mk4SwerveModuleBuilder;
 import com.swervedrivespecialties.swervelib.Mk4SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SdsModuleConfigurations;
 import com.swervedrivespecialties.swervelib.SwerveModule;
@@ -96,9 +97,12 @@ public class SwerveTrain extends SubsystemBase{
   
       // By default we will use Falcon 500s in standard configuration. But if you use a different configuration or motors
       // you MUST change it. If you do not, your code will crash on startup.
+
       m_frontLeftModule = Mk4SwerveModuleHelper.createFalcon500(
               // This parameter is optional, but will allow you to see the current state of the module on the dashboard.
-
+              tab.getLayout("Front Left Module", BuiltInLayouts.kList)
+                      .withSize(2, 4)
+                      .withPosition(0, 0),
               // This can either be STANDARD or FAST depending on your gear configuration
               Mk4SwerveModuleHelper.GearRatio.L1,
               // This is the ID of the drive motor
@@ -160,7 +164,8 @@ public class SwerveTrain extends SubsystemBase{
           return Rotation2d.fromDegrees(m_navx.getFusedHeading());
       }
   //    // We have to invert the angle of the NavX so that rotating the robot counter-clockwise makes the angle increase.
-      return Rotation2d.fromDegrees(360.0 - m_navx.getYaw());
+      return Rotation2d.fromDegrees(180.0 - m_navx.getYaw());
+
     }
   
     public void drive(ChassisSpeeds chassisSpeeds) {
