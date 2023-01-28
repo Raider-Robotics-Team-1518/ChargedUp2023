@@ -6,10 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.drive.SwerveCommand;
+import frc.robot.command.SwerveCommand;
+import frc.robot.command.SwerveZeroModulePositions;
 import frc.robot.drive.SwerveTrain;
 
 public class RobotContainer {
@@ -28,6 +30,9 @@ public class RobotContainer {
     // Left stick Y axis -> forward and backwards movement
     // Left stick X axis -> left and right movement
     // Right stick X axis -> rotation
+
+    SmartDashboard.putData(new SwerveZeroModulePositions(m_drivetrainSubsystem));
+
     m_drivetrainSubsystem.setDefaultCommand(new SwerveCommand(m_drivetrainSubsystem,
             () -> -modifyAxis(m_controller.getLeftY()) * SwerveTrain.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_controller.getLeftX()) * SwerveTrain.MAX_VELOCITY_METERS_PER_SECOND,

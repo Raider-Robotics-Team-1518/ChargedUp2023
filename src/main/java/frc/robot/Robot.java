@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.drive.SwerveTrain;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -21,10 +22,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
   }
 
-  CANCoder leftFront = new CANCoder(11);
-  CANCoder leftRear = new CANCoder(12);
-  CANCoder rightRear = new CANCoder(13);
-  CANCoder rightFront = new CANCoder(14);
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
@@ -74,18 +71,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-    
-    SmartDashboard.putNumber("L Front ABS", leftFront.getAbsolutePosition());
-    SmartDashboard.putNumber("L Front REL", leftFront.getPosition());
-
-    SmartDashboard.putNumber("L Rear ABS", leftRear.getAbsolutePosition());
-    SmartDashboard.putNumber("L Rear REL", leftRear.getPosition());
-
-    SmartDashboard.putNumber("R Rear ABS", rightRear.getAbsolutePosition());
-    SmartDashboard.putNumber("R Rear REL", rightRear.getPosition());
-
-    SmartDashboard.putNumber("R Front ABS", rightFront.getAbsolutePosition());
-    SmartDashboard.putNumber("R Front REL", rightFront.getPosition());
+  
   }
 
   @Override
